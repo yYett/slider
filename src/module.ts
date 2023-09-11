@@ -5,8 +5,10 @@ export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
+    // Usually the npm package name of your module
     name: "yyett-the-slider",
-    configKey: "yyett-the-slider",
+    // The key in `nuxt.config` that holds your module options
+    configKey: "theSlider",
   },
   // Default configuration options of the Nuxt module
   defaults: {},

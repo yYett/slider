@@ -2,6 +2,20 @@
   --items-grid-row: 1 / span 3;
   --items-grid-column: 1 / span 3;
 
+  --items-direction: row;
+  --items-translate3d: -50%;
+  --child-width: 100%;
+
   grid-row: var(--items-grid-row);
-  grid-column: var(--items-grid-column)
+  grid-column: var(--items-grid-column);
+
+  display: flex;
+  flex-direction: var(--items-direction);
+
+  transform: translate3d(var(--items-translate3d), 0, 0);
+
+  &>* {
+    flex-shrink: 0;
+    width: var(--child-width);
+  }
 }

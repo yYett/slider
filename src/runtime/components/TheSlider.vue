@@ -4,13 +4,18 @@
       <slot name="items" />
     </div>
 
-    <slot name="navigation">
+    <slot name="navigation-prev">
       <div class="the-navigation-prev" />
-      <div class="the-navigation-next" />
+      <div class="the-navigation-next" @click="slideNext()" />
     </slot>
     <slot name="pagination">
       <div class="the-slider-pagination" />
     </slot>
   </div>
 </template>
-<script setup></script>
+<script setup lang="ts">
+import { TheSlider } from "../interface/props";
+import { slideNext } from "../utils/navigation";
+
+const props = defineProps<TheSlider>();
+</script>
