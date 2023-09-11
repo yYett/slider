@@ -1,6 +1,6 @@
 $navigation-map: (
-  'prev',
-  'next'
+  'prev': (justify-self: start),
+  'next': (justify-self: end)
 );
 
 .the-navigation {
@@ -8,7 +8,6 @@ $navigation-map: (
 
   &-prev,
   &-next {
-    background-color: red;
     position: relative;
     grid-row: var(--navigation-row, 2);
     grid-column: var(--navigation-column);
@@ -22,10 +21,13 @@ $navigation-map: (
     }
   }
 
-  @each $item in $navigation-map {
+  @each $item, $props in $navigation-map {
     &-#{$item} {
       --navigation-column: var(--navigation-column-#{$item});
-      background-color: beige;
+
+      @each $prop, $value in $props {
+        #{$prop}: $value;
+      }
 
       &::after {
         content:var(--navigation-icone-#{$item});
