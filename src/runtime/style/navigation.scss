@@ -3,7 +3,7 @@ $navigation-map: (
   'next': (justify-self: end)
 );
 
-.the-navigation {
+%navigation {
   // no code
 
   &-prev,

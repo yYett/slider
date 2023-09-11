@@ -1,3 +1,6 @@
+@use './navigation.scss' as *;
+@use './items.scss' as *;
+
 .the-slider {
   --slider-rows: 3;
   --slider-columns: 3;
@@ -15,6 +18,11 @@
   grid-template-columns: repeat(var(--slider-columns), 1fr);
 
 
-  @import './items';
-  @import './navigation';
+  .the-navigation {
+    @extend %navigation;
+  }
+
+  .the-items {
+    @extend %the-items;
+  }
 }

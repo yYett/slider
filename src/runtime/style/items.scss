@@ -1,18 +1,21 @@
-.the-items {
+%the-items {
   --items-grid-row: 1 / span 3;
   --items-grid-column: 1 / span 3;
 
   --items-direction: row;
-  --items-translate3d: -50%;
-  --child-width: 100%;
+  --items-nr: 2;
+  --active-item: 1;
+  --items-gap: 2rem;
+  --child-width: calc((100% - (var(--items-nr) - 1) * var(--items-gap)) / var(--items-nr));
 
   grid-row: var(--items-grid-row);
   grid-column: var(--items-grid-column);
 
   display: flex;
   flex-direction: var(--items-direction);
+  gap: var(--items-gap);
 
-  transform: translate3d(var(--items-translate3d), 0, 0);
+  transform: translate3d(calc(var(--active-item) * (var(--child-width) + var(--items-gap)) * -1), 0, 0);
 
   &>* {
     flex-shrink: 0;
