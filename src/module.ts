@@ -1,19 +1,32 @@
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addImportsDir } from "@nuxt/kit";
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'my-module',
-    configKey: 'myModule'
+    name: "yyett-the-slider",
+    configKey: "yyett-the-slider",
   },
   // Default configuration options of the Nuxt module
   defaults: {},
-  setup (options, nuxt) {
-    const resolver = createResolver(import.meta.url)
+  // Shorthand sugar to register Nuxt hooks
+  hooks: {
+    "components:dirs"(dirs) {
+      // Add ./components dir to the list
+      const { resolve } = createResolver(import.meta.url);
 
-    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve('./runtime/plugin'))
-  }
-})
+      dirs.push({
+        path: resolve(__dirname, "./components"),
+        pathPrefix: false,
+      });
+    },
+  },
+  setup(options, nuxt) {
+    const { resolve } = createResolver(import.meta.url);
+
+    addImportsDir(resolve("runtime/composables"));
+
+    nuxt.options.css.push(resolve("runtime/style/main.scss"));
+  },
+});

@@ -1,0 +1,35 @@
+$navigation-map: (
+  'prev',
+  'next'
+);
+
+.the-navigation {
+  // no code
+
+  &-prev,
+  &-next {
+    background-color: red;
+    position: relative;
+    grid-row: var(--navigation-row, 2);
+    grid-column: var(--navigation-column);
+
+    &-top {
+      --navigation-row: 1;
+    }
+
+    &-bottom {
+      --navigation-row: 3;
+    }
+  }
+
+  @each $item in $navigation-map {
+    &-#{$item} {
+      --navigation-column: var(--navigation-column-#{$item});
+      background-color: beige;
+
+      &::after {
+        content:var(--navigation-icone-#{$item});
+      }
+    }
+  }
+}

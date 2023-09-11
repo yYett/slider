@@ -1,0 +1,17 @@
+.the-slider {
+  --slider-rows: 3;
+  --slider-columns: 3;
+
+  --navigation-column-prev: 1;
+  --navigation-column-next: 3;
+  --navigation-icone-prev: '<';
+  --navigation-icone-next: '>';
+
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(var(--slider-rows), 1fr);
+  grid-template-columns: repeat(var(--slider-columns), 1fr);
+
+  @import './items';
+  @import './navigation';
+}
