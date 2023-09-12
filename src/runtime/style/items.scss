@@ -2,6 +2,9 @@
   --items-grid-row: 1 / span 3;
   --items-grid-column: 1 / span 3;
 
+  --slider-transition-duration: 0.25s;
+  --slider-transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
   --child-width: calc(
     (100% - (var(--per-view, 1) - 1) * var(--items-gap, 24px)) /
       var(--per-view, 1)
@@ -13,7 +16,8 @@
   display: flex;
   gap: var(--items-gap, 24px);
 
-  transition: all 0.25s ease-out;
+  transition: all var(--slider-transition-duration)
+    var(--slider-transition-easing);
   transform: translate3d(
     calc(
       var(--active-slide, 1) * (var(--child-width) + var(--items-gap, 24px)) *
