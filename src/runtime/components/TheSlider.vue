@@ -4,7 +4,7 @@
       <slot name="items" />
     </div>
 
-    <slot name="navigation-prev">
+    <slot name="navigation">
       <div class="the-navigation-prev" />
       <div class="the-navigation-next" @click="slideNext()" />
     </slot>

@@ -1,6 +1,10 @@
 $navigation-map: (
-  'prev': (justify-self: start),
-  'next': (justify-self: end)
+  "prev": (
+    justify-self: start,
+  ),
+  "next": (
+    justify-self: end,
+  ),
 );
 
 %navigation {
@@ -30,7 +34,7 @@ $navigation-map: (
       }
 
       &::after {
-        content:var(--navigation-icone-#{$item});
+        content: var(--navigation-icone-#{$item});
       }
     }
   }

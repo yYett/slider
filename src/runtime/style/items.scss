@@ -6,7 +6,9 @@
   --items-nr: 2;
   --active-item: 1;
   --items-gap: 2rem;
-  --child-width: calc((100% - (var(--items-nr) - 1) * var(--items-gap)) / var(--items-nr));
+  --child-width: calc(
+    (100% - (var(--items-nr) - 1) * var(--items-gap)) / var(--items-nr)
+  );
 
   grid-row: var(--items-grid-row);
   grid-column: var(--items-grid-column);
@@ -15,9 +17,13 @@
   flex-direction: var(--items-direction);
   gap: var(--items-gap);
 
-  transform: translate3d(calc(var(--active-item) * (var(--child-width) + var(--items-gap)) * -1), 0, 0);
+  transform: translate3d(
+    calc(var(--active-item) * (var(--child-width) + var(--items-gap)) * -1),
+    0,
+    0
+  );
 
-  &>* {
+  & > * {
     flex-shrink: 0;
     width: var(--child-width);
   }

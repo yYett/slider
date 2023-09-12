@@ -1,10 +1,17 @@
 <template>
   <TheSlider>
     <template #items>
-      <TheSliderItem class="test" v-for="i in 5" :key="i">
-        Slider {{ i }} Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Saepe eum tempora laudantium aspernatur porro a deleniti totam,
-        reiciendis, officiis esse corrupti. Velit aliquam tempore nihil.
+      <TheSliderItem
+        v-slot="slotProps"
+        class="test"
+        :items="[1, 2, 3, 4, 5, 6]"
+      >
+        <h3>Slide - {{ slotProps.item }}</h3>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
+          tempora laudantium aspernatur porro a deleniti totam, reiciendis,
+          officiis esse corrupti. Velit aliquam tempore nihil.
+        </p>
       </TheSliderItem>
     </template>
   </TheSlider>
@@ -24,7 +31,7 @@ import TheSliderItem from "../dist/runtime/components/TheSliderItem.vue";
 
 .test {
   box-shadow: #64646f8a 0px 7px 29px 0px;
-  z-index:1;
+  z-index: 1;
   position: relative;
 }
 </style>
