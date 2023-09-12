@@ -1,4 +1,9 @@
-import { defineNuxtModule, createResolver, addImportsDir } from "@nuxt/kit";
+import {
+  defineNuxtModule,
+  createResolver,
+  addImportsDir,
+  addComponentsDir,
+} from "@nuxt/kit";
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {}
@@ -13,22 +18,28 @@ export default defineNuxtModule<ModuleOptions>({
   // Default configuration options of the Nuxt module
   defaults: {},
   // Shorthand sugar to register Nuxt hooks
-  hooks: {
-    "components:dirs"(dirs) {
-      // Add ./components dir to the list
-      const { resolve } = createResolver(import.meta.url);
+  // hooks: {
+  //   "components:dirs"(dirs) {
+  //     // Add ./components dir to the list
+  //     const { resolve } = createResolver(import.meta.url);
 
-      dirs.push({
-        path: resolve(__dirname, "./components"),
-        pathPrefix: false,
-      });
-    },
-  },
+  //     dirs.push({
+  //       path: resolve(__dirname, "./components/**"),
+  //       pathPrefix: false,
+  //     });
+  //   },
+  // },
   setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
-    addImportsDir(resolve("runtime/composables"));
+    addComponentsDir({ path: resolve("runtime/components") });
+    addImportsDir(resolve("runtime/composables/**"));
 
-    nuxt.options.css.push(resolve("runtime/style/main.scss"));
+    nuxt.options.css.push(
+      ...[
+        resolve("runtime/style/main.scss"),
+        resolve("runtime/style/items.scss"),
+      ]
+    );
   },
 });

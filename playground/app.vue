@@ -1,25 +1,37 @@
 <template>
+  <!-- <Zlider>
+    <items>
+      <myCard />
+    </items>
+    <Nav ref="nav" />
+    <Pag ref="pag" />
+  </Zlider>
+
+  <Zlider>
+    <wrapper>
+      <myCard v-for="i in 5" :key="i" />
+    </wrapper>
+    <Nav ref="nav" />
+    <Pag ref="pag" />
+  </Zlider> -->
+
   <TheSlider>
-    <template #items>
-      <TheSliderItem
-        v-slot="slotProps"
-        class="test"
-        :items="[1, 2, 3, 4, 5, 6]"
-      >
-        <h3>Slide - {{ slotProps.item }}</h3>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
-          tempora laudantium aspernatur porro a deleniti totam, reiciendis,
-          officiis esse corrupti. Velit aliquam tempore nihil.
-        </p>
-      </TheSliderItem>
-    </template>
+    <TheSliderItems v-slot="slotProps" :items="[1, 2, 3, 4, 5, 6]">
+      <h3>Slide - {{ slotProps.item }}</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
+        tempora laudantium aspernatur porro a deleniti totam, reiciendis,
+        officiis esse corrupti. Velit aliquam tempore nihil.
+      </p>
+    </TheSliderItems>
+    <TheSliderArrows>
+      <!-- <p>myCustomNav</p> -->
+    </TheSliderArrows>
   </TheSlider>
 </template>
 
 <script setup>
-import TheSlider from "../dist/runtime/components/TheSlider.vue";
-import TheSliderItem from "../dist/runtime/components/TheSliderItem.vue";
+//
 </script>
 
 <style>
