@@ -2,23 +2,23 @@
   --items-grid-row: 1 / span 3;
   --items-grid-column: 1 / span 3;
 
-  --items-direction: row;
-  --items-nr: 2;
-  --active-item: 1;
-  --items-gap: 2rem;
   --child-width: calc(
-    (100% - (var(--items-nr) - 1) * var(--items-gap)) / var(--items-nr)
+    (100% - (var(--per-view, 1) - 1) * var(--items-gap, 24px)) /
+      var(--per-view, 1)
   );
 
   grid-row: var(--items-grid-row);
   grid-column: var(--items-grid-column);
 
   display: flex;
-  flex-direction: var(--items-direction);
-  gap: var(--items-gap);
+  gap: var(--items-gap, 24px);
 
+  transition: all 0.25s ease-out;
   transform: translate3d(
-    calc(var(--active-item) * (var(--child-width) + var(--items-gap)) * -1),
+    calc(
+      var(--active-slide, 1) * (var(--child-width) + var(--items-gap, 24px)) *
+        -1
+    ),
     0,
     0
   );

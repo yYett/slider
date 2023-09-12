@@ -13,4 +13,8 @@
   display: grid;
   grid-template-rows: repeat(var(--slider-rows), 1fr);
   grid-template-columns: repeat(var(--slider-columns), 1fr);
+
+  button {
+    all: unset;
+  }
 }

@@ -16,6 +16,11 @@ $navigation-map: (
     grid-row: var(--navigation-row, 2);
     grid-column: var(--navigation-column);
 
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+
+    background-color: crimson;
+
     &-top {
       --navigation-row: 1;
     }

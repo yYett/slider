@@ -33,7 +33,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url);
 
     addComponentsDir({ path: resolve("runtime/components") });
-    addImportsDir(resolve("runtime/composables/**"));
+    addImportsDir(resolve("runtime/composables"));
 
     nuxt.options.css.push(
       ...[
