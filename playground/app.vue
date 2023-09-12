@@ -15,19 +15,19 @@
     <Pag ref="pag" />
   </Zlider> -->
 
-  <TheSlider>
-    <TheSliderItems v-slot="slotProps" :items="[1, 2, 3, 4, 5, 6]">
+  <Zlider>
+    <ZliderItems v-slot="slotProps" :items="[1, 2, 3, 4, 5, 6]">
       <h3>Slide - {{ slotProps.item }}</h3>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
         tempora laudantium aspernatur porro a deleniti totam, reiciendis,
         officiis esse corrupti. Velit aliquam tempore nihil.
       </p>
-    </TheSliderItems>
-    <TheSliderArrows>
+    </ZliderItems>
+    <ZliderArrows>
       <!-- <p>myCustomNav</p> -->
-    </TheSliderArrows>
-  </TheSlider>
+    </ZliderArrows>
+  </Zlider>
 </template>
 
 <script setup>

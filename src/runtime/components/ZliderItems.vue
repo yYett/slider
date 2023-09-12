@@ -1,12 +1,12 @@
 <template>
-  <TheSliderWrapper>
+  <ZliderWrapper>
     <div v-for="(item, i) in props.items" :key="i">
       <slot :item="item" />
     </div>
-  </TheSliderWrapper>
+  </ZliderWrapper>
 </template>
 <script setup lang="ts">
-import { TheSliderItems } from "../interface/props";
+import { ZliderItems } from "../interface/props";
 
-const props = defineProps<TheSliderItems>();
+const props = defineProps<ZliderItems>();
 </script>

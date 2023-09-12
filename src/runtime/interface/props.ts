@@ -1,8 +1,8 @@
-export interface TheSlider {
+export interface Zlider {
   navigation?: boolean;
   pagination?: boolean;
 }
 
-export interface TheSliderItems {
+export interface ZliderItems {
   items: any[];
 }

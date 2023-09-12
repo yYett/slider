@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="the-slider">
     <slot />
@@ -5,7 +6,7 @@
 </template>
 <script setup lang="ts">
 // import { ref } from "#imports";
-import { TheSlider } from "../interface/props";
+import { Zlider } from "../interface/props";
 
-const props = defineProps<TheSlider>();
+const props = defineProps<Zlider>();
 </script>
