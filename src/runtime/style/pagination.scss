@@ -1,0 +1,26 @@
+.the-slider .the-pagination {
+  --bullet-width: calc(100% / (var(--pagination-bullets) + 1));
+
+  grid-row: var(--pagination-row, 3);
+  grid-column: var(--pagination-column, 1 / span 3);
+  align-self: end;
+
+  background-color: var(--pagination-bg-color, transparent);
+  height: var(--pagination-height, 5px);
+  width: var(--pagination-width, 100%);
+
+  &-progress {
+    background-color: red;
+    height: inherit;
+    width: calc(var(--bullet-width) * (var(--active-slide) + 1));
+    transition: all 0.4s ease;
+  }
+
+  &-scrollbar {
+    background-color: red;
+    height: inherit;
+    width: var(--bullet-width);
+    margin-left: calc(var(--bullet-width) * var(--active-slide));
+    transition: all 0.4s ease;
+  }
+}

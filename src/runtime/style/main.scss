@@ -2,10 +2,17 @@
   --slider-rows: 3;
   --slider-columns: 3;
 
+  --navigation-row: 2;
   --navigation-column-prev: 1;
   --navigation-column-next: 3;
   --navigation-icone-prev: "<";
   --navigation-icone-next: ">";
+
+  --pagination-column: 1 / span 3;
+  --pagination-row: 3;
+  --pagination-bg-color: #00808061;
+  --pagination-height: 5px;
+  --pagination-width: 100%;
 
   position: relative;
   overflow-x: clip;

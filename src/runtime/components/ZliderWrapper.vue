@@ -16,7 +16,6 @@ const wrapperRef = ref();
 
 onMounted(() => {
   const length = wrapperRef.value.children.length;
-
   setSlidesNr(length);
 });
 </script>

@@ -17,7 +17,8 @@ import { slideNext, slidePrev } from "../utils/navigation";
 // const props = defineProps<TheSlider>();
 
 defineExpose({
-  slideNext, 
+  slidePrev,
+  slideNext,
 });
 </script>
 <style scoped lang="scss">

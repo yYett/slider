@@ -16,7 +16,10 @@
   </Zlider> -->
 
   <Zlider>
-    <ZliderItems v-slot="slotProps" :items="[1, 2, 3, 4, 5, 6]">
+    <ZliderItems
+      v-slot="slotProps"
+      :items="[1, 2, 3, 4, 5, 6]"
+    >
       <h3>Slide - {{ slotProps.item }}</h3>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
@@ -27,6 +30,7 @@
     <ZliderArrows>
       <!-- <p>myCustomNav</p> -->
     </ZliderArrows>
+    <ZliderPagination />
   </Zlider>
 </template>
 

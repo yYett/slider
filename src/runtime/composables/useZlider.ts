@@ -7,7 +7,7 @@ const useZlider = () => {
     activeSlide: 0,
     slidesNr: 1,
     options: {
-      perView: 3,
+      perView: 2,
       gap: 24,
       startAt: 1,
     },
@@ -41,7 +41,6 @@ const useZlider = () => {
     const options = state.value.options;
 
     return {
-      "--active-slide": state.value.activeSlide,
       "--items-gap": `${options.gap}px`,
       "--per-view": options.perView,
     };
@@ -55,6 +54,11 @@ const useZlider = () => {
     state.value.activeSlide > 0 && state.value.activeSlide--;
   };
 
+  const getZlideProp = <T extends keyof ZliderState>(
+    prop: T
+  ): ZliderState[T] | undefined => {
+    return state.value?.[prop];
+  };
   return {
     state,
     setZlideState,
@@ -63,6 +67,7 @@ const useZlider = () => {
     getZlideCssVariables,
     incActiveSlide,
     decActiveSlide,
+    getZlideProp,
   };
 };
 

@@ -6,3 +6,7 @@ export interface Zlider {
 export interface ZliderItems {
   items: any[];
 }
+
+export interface ZliderPagination {
+  type: "progress" | "scrollbar";
+}
