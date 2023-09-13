@@ -41,24 +41,20 @@ const diff = ref(0);
 
 const xp1 = computed(() => {
   const prev = getZlideProp("activeSlide")!;
-  console.log("prev", prev);
-  console.log((1 / 100) * Math.abs(diff.value));
-
-  const value = prev + (1 / 100) * Math.abs(diff.value);
-
+  const value = prev - (1 / 100) * diff.value;
   return value;
 });
 
 const toggleSlide = (event: any): void => {
-  move.value = !move.value;
-  initPosition.value = (event.clientX * 100) / window.innerWidth;
-
-  move.value &&
+  if (move.value) {
     setZlideState({
       activeSlide: xp1.value,
     });
 
-  diff.value = 0;
+    diff.value = 0;
+  }
+  move.value = !move.value;
+  initPosition.value = (event.clientX * 100) / window.innerWidth;
 };
 
 const slide = debounce((event: any): void => {
