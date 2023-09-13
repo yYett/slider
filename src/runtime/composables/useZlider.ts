@@ -4,18 +4,23 @@ import { ZliderState, ZliderOptions } from "../interface/state";
 
 const useZlider = () => {
   const inicialState: ZliderState = {
+    init: true,
     activeSlide: 0,
     slidesNr: 1,
     options: {
       perView: 2,
       gap: 24,
-      startAt: 1,
+      startAt: 0,
+      navigation: {},
+      pagination: {},
     },
   };
 
   const state = useState<ZliderState>("Zlider", () => inicialState);
 
   const setZlideState = (payload: any): void => {
+    console.log(payload);
+    
     payload && Object.assign(state.value, payload);
   };
 
@@ -23,11 +28,14 @@ const useZlider = () => {
     if (!options) return;
 
     const obj = {
+      init: true,
       activeSlide: options.startAt ?? 0,
       options: options,
     };
 
     setZlideState(obj);
+
+    console.log("%c state.value", "color:teal", state.value);
   };
 
   const setSlidesNr = (num: number): void => {
@@ -59,6 +67,7 @@ const useZlider = () => {
   ): ZliderState[T] | undefined => {
     return state.value?.[prop];
   };
+
   return {
     state,
     setZlideState,

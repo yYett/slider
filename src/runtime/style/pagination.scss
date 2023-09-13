@@ -6,8 +6,8 @@
   align-self: end;
 
   background-color: var(--pagination-bg-color, transparent);
-  height: var(--pagination-height, 5px);
-  width: var(--pagination-width, 100%);
+  height: var(--pagination-height);
+  width: var(--pagination-width);
 
   &-progress {
     background-color: red;

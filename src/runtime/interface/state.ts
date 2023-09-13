@@ -1,4 +1,5 @@
 export interface ZliderState {
+  init: boolean;
   activeSlide: number;
   options: ZliderOptions;
   slidesNr: number;
@@ -10,4 +11,6 @@ export interface ZliderOptions {
   startAt: number;
   // autoplay?: boolean;
   // breakpoints: unknown;
+  navigation: {};
+  pagination: {};
 }

@@ -8,5 +8,5 @@ export interface ZliderItems {
 }
 
 export interface ZliderPagination {
-  type: "progress" | "scrollbar";
+  type?: "progress" | "scrollbar";
 }

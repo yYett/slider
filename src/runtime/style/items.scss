@@ -10,22 +10,21 @@
       var(--per-view, 1)
   );
 
+  // inc --active-slide decimals ( 0.0 till 1.0)
+  --slider-transition: calc(
+    var(--active-slide, 1) * (var(--child-width) + var(--items-gap, 24px)) * -1
+  );
+
   grid-row: var(--items-grid-row);
   grid-column: var(--items-grid-column);
 
   display: flex;
   gap: var(--items-gap, 24px);
-
+  cursor: pointer;
+  user-select: none;
   transition: all var(--slider-transition-duration)
     var(--slider-transition-easing);
-  transform: translate3d(
-    calc(
-      var(--active-slide, 1) * (var(--child-width) + var(--items-gap, 24px)) *
-        -1
-    ),
-    0,
-    0
-  );
+  transform: translate3d(var(--slider-transition), 0, 0);
 
   & > * {
     flex-shrink: 0;

@@ -27,9 +27,7 @@
         officiis esse corrupti. Velit aliquam tempore nihil.
       </p>
     </ZliderItems>
-    <ZliderArrows>
-      <!-- <p>myCustomNav</p> -->
-    </ZliderArrows>
+    <ZliderArrows />
     <ZliderPagination />
   </Zlider>
 </template>
