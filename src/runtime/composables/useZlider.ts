@@ -8,7 +8,7 @@ const useZlider = () => {
     activeSlide: 0,
     slidesNr: 1,
     options: {
-      perView: 2,
+      perView: 3,
       gap: 24,
       startAt: 0,
       navigation: {},
