@@ -3,9 +3,10 @@
     ref="wrapperRef"
     class="the-items"
     :style="[getZlideCssVariables(), { '--active-slide': xp1 }]"
-    @mousedown="toggleSlide($event)"
+    @mousedown="toggleSlide($event, true)"
     @mousemove="slide"
-    @mouseup="toggleSlide($event)"
+    @mouseup="toggleSlide($event, false)"
+    @mouseleave="toggleSlide($event, false)"
   >
     <slot />
   </div>
@@ -22,7 +23,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import useZlider from "../composables/useZlider";
-import { slideNext, slidePrev } from "../utils/navigation";
 import { debounce } from "../utils/commons";
 
 const { setSlidesNr, getZlideCssVariables, getZlideProp, setZlideState } =
@@ -45,15 +45,15 @@ const xp1 = computed(() => {
   return value;
 });
 
-const toggleSlide = (event: any): void => {
+const toggleSlide = (event: any, state?: boolean): void => {
   if (move.value) {
     setZlideState({
-      activeSlide: xp1.value,
+      activeSlide: Math.round(xp1.value),
     });
 
     diff.value = 0;
   }
-  move.value = !move.value;
+  move.value = state ?? !move.value;
   initPosition.value = (event.clientX * 100) / window.innerWidth;
 };
 
