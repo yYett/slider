@@ -2,7 +2,6 @@
   <div
     ref="wrapperRef"
     class="the-items"
-    :style="getZlideCssVariables()"
   >
     <slot />
   </div>
@@ -11,7 +10,7 @@
 import { ref, onMounted } from "vue";
 import useZlider from "../composables/useZlider";
 
-const { setSlidesNr, getZlideCssVariables } = useZlider();
+const { setSlidesNr } = useZlider();
 const wrapperRef = ref();
 
 onMounted(() => {
