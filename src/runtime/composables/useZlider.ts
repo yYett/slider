@@ -20,7 +20,7 @@ const useZlider = () => {
 
   const setZlideState = (payload: any): void => {
     console.log(payload);
-    
+
     payload && Object.assign(state.value, payload);
   };
 
@@ -54,6 +54,10 @@ const useZlider = () => {
     };
   };
 
+  const canZlide = (value: number): boolean => {
+    return value >= 0 && value <= state.value.slidesNr;
+  };
+
   const incActiveSlide = (): void => {
     state.value.activeSlide < state.value.slidesNr && state.value.activeSlide++;
   };
@@ -74,6 +78,7 @@ const useZlider = () => {
     init,
     setSlidesNr,
     getZlideCssVariables,
+    canZlide,
     incActiveSlide,
     decActiveSlide,
     getZlideProp,

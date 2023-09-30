@@ -11,10 +11,16 @@
   </slot>
 </template>
 <script setup lang="ts">
+import useZlider from "../composables/useZlider";
+
 // import { ref } from "#imports";
-import { slideNext, slidePrev } from "../utils/navigation";
+
+const { incActiveSlide, decActiveSlide } = useZlider();
 
 // const props = defineProps<TheSlider>();
+
+const slidePrev = () => decActiveSlide();
+const slideNext = () => incActiveSlide();
 
 defineExpose({
   slidePrev,

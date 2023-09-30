@@ -1,20 +1,4 @@
 <template>
-  <!-- <Zlider>
-    <items>
-      <myCard />
-    </items>
-    <Nav ref="nav" />
-    <Pag ref="pag" />
-  </Zlider>
-
-  <Zlider>
-    <wrapper>
-      <myCard v-for="i in 5" :key="i" />
-    </wrapper>
-    <Nav ref="nav" />
-    <Pag ref="pag" />
-  </Zlider> -->
-
   <Zlider>
     <ZliderItems
       v-slot="slotProps"
