@@ -1,87 +1,47 @@
 import { useState } from "#imports";
-import { StyleValue } from "vue";
-import { ZliderState, ZliderOptions } from "../interface/state";
+import { inicialState } from "../../../dist/runtime/config/inicial-state";
+import { ZliderState, ZliderOptions } from "../interface/zlider";
 
 const useZlider = () => {
-  const inicialState: ZliderState = {
-    init: true,
-    activeSlide: 0,
-    slidesNr: 1,
-    options: {
-      perView: 3,
-      gap: 24,
-      startAt: 0,
-      navigation: {},
-      pagination: {},
-    },
+  const state = useState<{ [id: string]: ZliderState }>(
+    "useZlider",
+    () => ({})
+  );
+
+  const updateZlide = (payload: any): void => {
+    if (payload?.instance) {
+      state.value[payload.instance] = Object.assign(
+        state.value[payload.instance] || {},
+        payload
+      );
+    }
   };
 
-  const state = useState<ZliderState>("Zlider", () => inicialState);
-
-  const setZlideState = (payload: any): void => {
-    console.log(payload);
-
-    payload && Object.assign(state.value, payload);
+  const removeZlide = (instance: string): void => {
+    delete state.value[instance];
   };
 
-  const init = (options?: ZliderOptions): void => {
-    if (!options) return;
+  const init = (instance: string, options?: ZliderOptions): void => {
+    options = Object.assign({ ...inicialState.options }, options);
+    const obj = Object.assign(
+      { ...inicialState },
+      {
+        instance: instance,
+        activeSlide: options?.startAt ?? 0,
+        options: options,
+      }
+    );
 
-    const obj = {
-      init: true,
-      activeSlide: options.startAt ?? 0,
-      options: options,
-    };
-
-    setZlideState(obj);
+    updateZlide(obj);
 
     console.log("%c state.value", "color:teal", state.value);
   };
 
-  const setSlidesNr = (num: number): void => {
-    num &&
-      setZlideState({
-        slidesNr: num - state.value.options.perView!,
-      });
-  };
-
-  const getZlideCssVariables = (): StyleValue => {
-    const options = state.value.options;
-
-    return {
-      "--items-gap": `${options.gap}px`,
-      "--per-view": options.perView,
-    };
-  };
-
-  const canZlide = (value: number): boolean => {
-    return value >= 0 && value <= state.value.slidesNr;
-  };
-
-  const incActiveSlide = (): void => {
-    state.value.activeSlide < state.value.slidesNr && state.value.activeSlide++;
-  };
-
-  const decActiveSlide = (): void => {
-    state.value.activeSlide > 0 && state.value.activeSlide--;
-  };
-
-  const getZlideProp = <T extends keyof ZliderState>(
-    prop: T
-  ): ZliderState[T] | undefined => {
-    return state.value?.[prop];
-  };
-
   return {
     state,
-    setZlideState,
+    updateZlide,
+    removeZlide,
     init,
-    setSlidesNr,
-    getZlideCssVariables,
-    canZlide,
-    incActiveSlide,
-    decActiveSlide,
-    getZlideProp,
   };
 };
 

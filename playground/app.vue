@@ -1,6 +1,15 @@
 <template>
-  <Zlider>
-    <ZliderItems
+  <Zlider
+    v-for="i in 2"
+    :key="i"
+    :options="{
+      perView: 2,
+      gap: 64,
+    }"
+  >
+    i
+    {{ i }}
+    <!-- <ZliderItems
       v-slot="slotProps"
       :items="[1, 2, 3, 4, 5, 6]"
     >
@@ -12,11 +21,11 @@
       </p>
     </ZliderItems>
     <ZliderArrows />
-    <ZliderPagination />
+    <ZliderPagination /> -->
   </Zlider>
 </template>
 
-<script setup>
+<script setup lang="ts">
 //
 </script>
 

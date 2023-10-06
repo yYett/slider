@@ -9,7 +9,7 @@
   </ZliderWrapper>
 </template>
 <script setup lang="ts">
-import type { ZliderItems } from "../interface/props";
+import type { ZliderItems } from "../interface/zlider";
 import useZlider from "../composables/useZlider";
 
 const props = defineProps<ZliderItems>();

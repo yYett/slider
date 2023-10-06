@@ -9,3 +9,7 @@ export function debounce<T extends (...args: Parameters<T>) => void>(
     timer = setTimeout(() => fn.apply(this, args), delay);
   };
 }
+
+export const genUnique = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};
