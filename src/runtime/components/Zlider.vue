@@ -1,9 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
+    :id="state.instance"
     ref="zliderRef"
     class="the-slider"
-    :style="[getZlideCssVariables(), { '--active-slide': handleActiveSlide }]"
+    :style="[getCssVariables(), { '--active-slide': handleActiveSlide }]"
     @mousedown="toggleSlide($event, true)"
     @mousemove="handleSlide"
     @mouseup="toggleSlide($event, false)"
@@ -13,48 +14,90 @@
   </div>
 </template>
 <script setup lang="ts">
-// import type { Zlider } from "../interface/props";
+import type { ZliderProps } from "../interface/zlider";
+import {
+  computed,
+  reactive,
+  ref,
+  onBeforeUnmount,
+  provide,
+  readonly,
+} from "vue";
 import useZlider from "../composables/useZlider";
-import { computed, ref } from "vue";
-import { debounce } from "../utils/commons";
+import { debounce, genUnique } from "../utils/commons";
+import { onUpdated } from "vue";
+import { initZlider } from "../utils/core";
 
-// const props = defineProps<Zlider>();
+const props = defineProps<ZliderProps>();
 
-const { getZlideCssVariables, getZlideProp, setZlideState, canZlide } =
-  useZlider();
+interface ZliderState {
+  instance: string;
+  move: boolean;
+  initPosition: number;
+  diff: number;
+}
 
-const zliderRef = ref();
+const inicialState: ZliderState = {
+  instance: genUnique(),
+  move: false,
+  initPosition: 0,
+  diff: 0,
+};
 
-const move = ref<boolean>(false);
-const initPosition = ref<number>(0);
-const diff = ref<number>(0);
+const state = reactive<ZliderState>({ ...inicialState });
+const zliderRef = ref<HTMLElement>();
+
+const {
+  set,
+  get,
+  canZlide,
+  setSlidesNr,
+  slideNext,
+  slidePrev,
+  getCssVariables,
+} = useZlider(initZlider(state.instance, props?.options));
+
+provide(
+  "zliderInstance",
+  readonly({
+    instance: state?.instance,
+    get,
+    setSlidesNr,
+    slideNext,
+    slidePrev,
+  })
+);
+
+onUpdated(() => console.log("onUpdated", state.instance));
+
+// onBeforeUnmount(() => removeZlide(state.instance));
 
 const handleActiveSlide = computed(() => {
-  const prev = getZlideProp("activeSlide")!;
-  const value = prev - (1 / 100) * diff.value;
+  const prev = get("activeSlide")!;
+  const value = prev - (1 / 100) * state.diff;
   return value;
 });
 
 const triggerUpdate = () => {
-  if (move.value) {
-    const value = Math.round(handleActiveSlide.value);
-    canZlide(value) && setZlideState({ activeSlide: value });
-    diff.value = 0;
-  }
+  if (!state.move) return;
+
+  const value = Math.round(handleActiveSlide.value);
+  canZlide(value) && set("activeSlide", value);
+  state.diff = 0;
 };
 
-const toggleSlide = (event: any, state?: boolean): void => {
+const toggleSlide = (event: MouseEvent, isSliding?: boolean): void => {
   triggerUpdate();
-  const width = (zliderRef.value as HTMLElement).offsetWidth;
-  move.value = state ?? !move.value;
-  initPosition.value = (event.clientX * 100) / width;
+  const width = zliderRef.value?.offsetWidth!;
+  state.move = isSliding ?? !state.move;
+  state.initPosition = (event.clientX * 100) / width;
 };
 
-const handleSlide = debounce((event: any): void => {
-  if (!move.value) return;
+const handleSlide = debounce((event: MouseEvent): void => {
+  if (!state.move) return;
 
-  const width = (zliderRef.value as HTMLElement).offsetWidth;
+  const width = zliderRef.value?.offsetWidth!;
   const currPosition = (event.clientX * 100) / width;
-  diff.value = currPosition - initPosition.value;
+  state.diff = currPosition - state.initPosition;
 }, 5);
 </script>

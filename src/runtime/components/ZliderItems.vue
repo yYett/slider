@@ -9,12 +9,11 @@
   </ZliderWrapper>
 </template>
 <script setup lang="ts">
-import type { ZliderItems } from "../interface/props";
-import useZlider from "../composables/useZlider";
+import { inject } from "vue";
+import type { ZliderInjection, ZliderItems } from "../interface/zlider";
 
 const props = defineProps<ZliderItems>();
-
-const { setSlidesNr } = useZlider();
+const { setSlidesNr } = inject<ZliderInjection>("zliderInstance")!;
 
 setSlidesNr(props.items.length);
 </script>
