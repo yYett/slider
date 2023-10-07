@@ -26,6 +26,14 @@ export interface ZliderState {
   options: ZliderOptions;
 }
 
+export interface ZliderInjection {
+  instance: string;
+  get<T extends keyof ZliderState>(prop: T): ZliderState[T] | null;
+  setSlidesNr(value: number): void;
+  slideNext(): void;
+  slidePrev(): void;
+}
+
 export interface ZliderItems {
   items: any[];
 }

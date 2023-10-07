@@ -10,10 +10,10 @@
 </template>
 <script setup lang="ts">
 import { inject } from "vue";
-import type { ZliderItems } from "../interface/zlider";
+import type { ZliderInjection, ZliderItems } from "../interface/zlider";
 
 const props = defineProps<ZliderItems>();
-const { setSlidesNr } = inject("instance");
+const { setSlidesNr } = inject<ZliderInjection>("zliderInstance")!;
 
 setSlidesNr(props.items.length);
 </script>

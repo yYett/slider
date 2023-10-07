@@ -11,16 +11,11 @@
   </slot>
 </template>
 <script setup lang="ts">
-import useZlider from "../composables/useZlider";
-
-// import { ref } from "#imports";
-
-const { incActiveSlide, decActiveSlide } = useZlider();
-
+import { inject } from "vue";
+import { ZliderInjection } from "../interface/zlider";
 // const props = defineProps<TheSlider>();
 
-const slidePrev = () => decActiveSlide();
-const slideNext = () => incActiveSlide();
+const { slideNext, slidePrev } = inject<ZliderInjection>("zliderInstance")!;
 
 defineExpose({
   slidePrev,

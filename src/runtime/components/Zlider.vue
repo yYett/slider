@@ -47,13 +47,29 @@ const inicialState: ZliderState = {
 const state = reactive<ZliderState>({ ...inicialState });
 const zliderRef = ref<HTMLElement>();
 
-const { set, get, canZlide, setSlidesNr, getCssVariables } = useZlider(
-  initZlider(state.instance, props?.options)
+const {
+  set,
+  get,
+  canZlide,
+  setSlidesNr,
+  slideNext,
+  slidePrev,
+  getCssVariables,
+} = useZlider(initZlider(state.instance, props?.options));
+
+provide(
+  "zliderInstance",
+  readonly({
+    instance: state?.instance,
+    get,
+    setSlidesNr,
+    slideNext,
+    slidePrev,
+  })
 );
 
-provide("instance", readonly({ instance: state?.instance, setSlidesNr }));
-
 onUpdated(() => console.log("onUpdated", state.instance));
+
 // onBeforeUnmount(() => removeZlide(state.instance));
 
 const handleActiveSlide = computed(() => {

@@ -21,8 +21,6 @@ const useZlider = (obj: ZliderState) => {
   };
 
   const setSlidesNr = (value: number): void => {
-    console.log(value);
-    
     value && set("slidesNr", value - state.value.options.perView!);
   };
 

@@ -3,7 +3,7 @@
     <div
       class="the-pagination"
       :style="{
-        '--pagination-bullets': getZlideProp('slidesNr'),
+        '--pagination-bullets': get('slidesNr'),
       }"
     >
       <div :class="`the-pagination-${type ?? 'scrollbar'}`" />
@@ -11,12 +11,12 @@
   </slot>
 </template>
 <script setup lang="ts">
-import type { ZliderPagination } from "../interface/zlider";
-import useZlider from "../composables/useZlider";
+import { inject } from "vue";
+import type { ZliderInjection, ZliderPagination } from "../interface/zlider";
 
-const { getZlideProp } = useZlider();
+defineProps<ZliderPagination>();
 
-const props = defineProps<ZliderPagination>();
+const { get } = inject<ZliderInjection>("zliderInstance")!;
 </script>
 <style scoped lang="scss">
 @import "../style/pagination.scss";
