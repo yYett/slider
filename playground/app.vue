@@ -19,10 +19,9 @@
         tempora laudantium aspernatur porro a deleniti totam, reiciendis,
         officiis esse corrupti. Velit aliquam tempore nihil.
       </p>
-      <!-- </ZliderItems>
-    <ZliderArrows />
-    <ZliderPagination /> -->
     </ZliderItems>
+    <ZliderArrows />
+    <ZliderPagination />
   </Zlider>
 </template>
 
