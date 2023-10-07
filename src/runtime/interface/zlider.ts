@@ -1,5 +1,3 @@
-import { StyleValue } from "vue";
-
 export interface ZliderBreakpoints {
   [key: number]: {
     perView?: number;
@@ -26,16 +24,6 @@ export interface ZliderState {
   activeSlide: number;
   slidesNr: number;
   options: ZliderOptions;
-}
-
-export interface ZliderMethods {
-  set(prop: string, value: string): void;
-  get<T extends keyof ZliderState>(prop: T): ZliderState[T] | null;
-  canZlide(value: number): boolean;
-  setSlideNr(value: number): void;
-  slideNext(): void;
-  slidePrev(): void;
-  getCssVariables(): StyleValue;
 }
 
 export interface ZliderItems {

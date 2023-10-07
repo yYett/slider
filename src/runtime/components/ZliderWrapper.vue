@@ -7,11 +7,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import useZlider from "../composables/useZlider";
+import { ref, inject, onMounted } from "vue";
 
-const { setSlidesNr } = useZlider();
 const wrapperRef = ref();
+const { setSlidesNr } = inject("instance");
 
 onMounted(() => {
   const length = wrapperRef.value.children.length;

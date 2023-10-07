@@ -1,47 +1,56 @@
 import { useState } from "#imports";
-import { inicialState } from "../../../dist/runtime/config/inicial-state";
-import { ZliderState, ZliderOptions } from "../interface/zlider";
+import { ZliderState } from "../interface/zlider";
+import type { StyleValue } from "vue";
 
-const useZlider = () => {
-  const state = useState<{ [id: string]: ZliderState }>(
-    "useZlider",
-    () => ({})
-  );
+const useZlider = (obj: ZliderState) => {
+  const state = useState<ZliderState>(obj.instance, () => obj);
 
-  const updateZlide = (payload: any): void => {
-    if (payload?.instance) {
-      state.value[payload.instance] = Object.assign(
-        state.value[payload.instance] || {},
-        payload
-      );
-    }
+  const set = <T extends keyof ZliderState>(
+    prop: T,
+    value: ZliderState[T]
+  ): void => {
+    if (prop) state.value[prop] = value;
   };
 
-  const removeZlide = (instance: string): void => {
-    delete state.value[instance];
+  const get = <T extends keyof ZliderState>(prop: T): ZliderState[T] | null => {
+    return prop ? state.value[prop] : null;
   };
 
-  const init = (instance: string, options?: ZliderOptions): void => {
-    options = Object.assign({ ...inicialState.options }, options);
-    const obj = Object.assign(
-      { ...inicialState },
-      {
-        instance: instance,
-        activeSlide: options?.startAt ?? 0,
-        options: options,
-      }
-    );
+  const canZlide = (value: number): boolean => {
+    return value >= 0 && value <= state.value.slidesNr!;
+  };
 
-    updateZlide(obj);
+  const setSlidesNr = (value: number): void => {
+    console.log(value);
+    
+    value && set("slidesNr", value - state.value.options.perView!);
+  };
 
-    console.log("%c state.value", "color:teal", state.value);
+  const slideNext = (): void => {
+    state.value.activeSlide < state.value.slidesNr && state.value.activeSlide++;
+  };
+
+  const slidePrev = (): void => {
+    state.value.activeSlide > 0 && state.value.activeSlide--;
+  };
+
+  const getCssVariables = (): StyleValue => {
+    const options = state.value.options;
+    return {
+      "--items-gap": `${options.gap}px`,
+      "--per-view": options.perView,
+    };
   };
 
   return {
     state,
-    updateZlide,
-    removeZlide,
-    init,
+    set,
+    get,
+    canZlide,
+    setSlidesNr,
+    slideNext,
+    slidePrev,
+    getCssVariables,
   };
 };
 

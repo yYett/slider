@@ -4,25 +4,31 @@
     :id="state.instance"
     ref="zliderRef"
     class="the-slider"
+    :style="[getCssVariables(), { '--active-slide': handleActiveSlide }]"
     @mousedown="toggleSlide($event, true)"
     @mousemove="handleSlide"
     @mouseup="toggleSlide($event, false)"
     @mouseleave="toggleSlide($event, false)"
   >
-    <!-- :style="[getZlideCssVariables(), { '--active-slide': handleActiveSlide }]" -->
     <slot />
   </div>
 </template>
 <script setup lang="ts">
 import type { ZliderProps } from "../interface/zlider";
-import { computed, reactive, ref, onBeforeUnmount } from "vue";
+import {
+  computed,
+  reactive,
+  ref,
+  onBeforeUnmount,
+  provide,
+  readonly,
+} from "vue";
 import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
 import { onUpdated } from "vue";
+import { initZlider } from "../utils/core";
 
 const props = defineProps<ZliderProps>();
-
-const { init, removeZlide } = useZlider();
 
 interface ZliderState {
   instance: string;
@@ -41,26 +47,30 @@ const inicialState: ZliderState = {
 const state = reactive<ZliderState>({ ...inicialState });
 const zliderRef = ref<HTMLElement>();
 
-onUpdated(() => console.log("onUpdated", state.instance));
+const { set, get, canZlide, setSlidesNr, getCssVariables } = useZlider(
+  initZlider(state.instance, props?.options)
+);
 
-onBeforeUnmount(() => removeZlide(state.instance));
+provide("instance", readonly({ instance: state?.instance, setSlidesNr }));
+
+onUpdated(() => console.log("onUpdated", state.instance));
+// onBeforeUnmount(() => removeZlide(state.instance));
 
 const handleActiveSlide = computed(() => {
-  // const prev = getZlideProp("activeSlide")!;
-  // const value = prev - (1 / 100) * state.diff;
-  // return value;
-  return 0;
+  const prev = get("activeSlide")!;
+  const value = prev - (1 / 100) * state.diff;
+  return value;
 });
 
 const triggerUpdate = () => {
   if (!state.move) return;
 
-  // const value = Math.round(handleActiveSlide.value);
-  // canZlide(value) && setSlideNr(value);
+  const value = Math.round(handleActiveSlide.value);
+  canZlide(value) && set("activeSlide", value);
   state.diff = 0;
 };
 
-const toggleSlide = (event: any, isSliding?: boolean): void => {
+const toggleSlide = (event: MouseEvent, isSliding?: boolean): void => {
   triggerUpdate();
   const width = zliderRef.value?.offsetWidth!;
   state.move = isSliding ?? !state.move;

@@ -9,7 +9,7 @@
   >
     i
     {{ i }}
-    <!-- <ZliderItems
+    <ZliderItems
       v-slot="slotProps"
       :items="[1, 2, 3, 4, 5, 6]"
     >
@@ -19,9 +19,10 @@
         tempora laudantium aspernatur porro a deleniti totam, reiciendis,
         officiis esse corrupti. Velit aliquam tempore nihil.
       </p>
-    </ZliderItems>
+      <!-- </ZliderItems>
     <ZliderArrows />
     <ZliderPagination /> -->
+    </ZliderItems>
   </Zlider>
 </template>
 
