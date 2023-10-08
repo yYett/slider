@@ -1,10 +1,10 @@
 import { inicialState } from "../config/inicial-state";
-import { ZliderOptions, ZliderState } from "../interface/zlider";
+import { ZliderOptions, ZliderUseState } from "../interface/zlider";
 
 export const initZlider = (
   instance: string,
   options?: ZliderOptions
-): ZliderState => {
+): ZliderUseState => {
   options = Object.assign({ ...inicialState.options }, options);
   const obj = Object.assign(
     { ...inicialState },

@@ -3,7 +3,7 @@
     <div
       class="the-pagination"
       :style="{
-        '--pagination-bullets': get('slidesNr'),
+        '--pagination-bullets': get('slidesNr') || 0,
       }"
     >
       <div :class="`the-pagination-${type ?? 'scrollbar'}`" />

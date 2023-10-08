@@ -18,7 +18,7 @@ export interface ZliderProps {
   options?: ZliderOptions;
 }
 
-export interface ZliderState {
+export interface ZliderUseState {
   instance: string;
   init: boolean;
   activeSlide: number;
@@ -28,7 +28,7 @@ export interface ZliderState {
 
 export interface ZliderInjection {
   instance: string;
-  get<T extends keyof ZliderState>(prop: T): ZliderState[T] | null;
+  get<T extends keyof ZliderUseState>(prop: T): ZliderUseState[T] | null;
   setSlidesNr(value: number): void;
   slideNext(): void;
   slidePrev(): void;

@@ -1,6 +1,6 @@
-import type { ZliderState } from "../interface/zlider";
+import type { ZliderUseState } from "../interface/zlider";
 
-export const inicialState: ZliderState = {
+export const inicialState: ZliderUseState = {
   instance: "",
   init: true,
   activeSlide: 0,

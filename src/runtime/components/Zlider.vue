@@ -15,17 +15,9 @@
 </template>
 <script setup lang="ts">
 import type { ZliderProps } from "../interface/zlider";
-import {
-  computed,
-  reactive,
-  ref,
-  onBeforeUnmount,
-  provide,
-  readonly,
-} from "vue";
+import { computed, reactive, ref, provide, readonly } from "vue";
 import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
-import { onUpdated } from "vue";
 import { initZlider } from "../utils/core";
 
 const props = defineProps<ZliderProps>();
@@ -67,10 +59,6 @@ provide(
     slidePrev,
   })
 );
-
-onUpdated(() => console.log("onUpdated", state.instance));
-
-// onBeforeUnmount(() => removeZlide(state.instance));
 
 const handleActiveSlide = computed(() => {
   const prev = get("activeSlide")!;

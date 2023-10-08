@@ -1,18 +1,20 @@
 import { useState } from "#imports";
-import { ZliderState } from "../interface/zlider";
+import { ZliderUseState } from "../interface/zlider";
 import type { StyleValue } from "vue";
 
-const useZlider = (obj: ZliderState) => {
-  const state = useState<ZliderState>(obj.instance, () => obj);
+const useZlider = (obj: ZliderUseState) => {
+  const state = useState<ZliderUseState>(obj.instance, () => obj);
 
-  const set = <T extends keyof ZliderState>(
+  const set = <T extends keyof ZliderUseState>(
     prop: T,
-    value: ZliderState[T]
+    value: ZliderUseState[T]
   ): void => {
     if (prop) state.value[prop] = value;
   };
 
-  const get = <T extends keyof ZliderState>(prop: T): ZliderState[T] | null => {
+  const get = <T extends keyof ZliderUseState>(
+    prop: T
+  ): ZliderUseState[T] | null => {
     return prop ? state.value[prop] : null;
   };
 

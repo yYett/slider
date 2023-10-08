@@ -11,24 +11,11 @@ export interface ModuleOptions {}
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     // Usually the npm package name of your module
-    name: "yyett-the-slider",
+    name: "yyett-zlider",
     // The key in `nuxt.config` that holds your module options
-    configKey: "theSlider",
+    configKey: "zlider",
   },
-  // Default configuration options of the Nuxt module
   defaults: {},
-  // Shorthand sugar to register Nuxt hooks
-  // hooks: {
-  //   "components:dirs"(dirs) {
-  //     // Add ./components dir to the list
-  //     const { resolve } = createResolver(import.meta.url);
-
-  //     dirs.push({
-  //       path: resolve(__dirname, "./components/**"),
-  //       pathPrefix: false,
-  //     });
-  //   },
-  // },
   setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
