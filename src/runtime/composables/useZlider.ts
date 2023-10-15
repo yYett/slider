@@ -34,6 +34,11 @@ const useZlider = (obj: ZliderUseState) => {
     state.value.activeSlide > 0 && state.value.activeSlide--;
   };
 
+  const slideTo = (slide: number): void => {
+    if (!canZlide(slide)) return;
+    state.value.activeSlide = slide;
+  };
+
   const getCssVariables = (): StyleValue => {
     const options = state.value.options;
     return {
@@ -50,6 +55,7 @@ const useZlider = (obj: ZliderUseState) => {
     setSlidesNr,
     slideNext,
     slidePrev,
+    slideTo,
     getCssVariables,
   };
 };
