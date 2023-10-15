@@ -10,7 +10,7 @@ export interface ZliderOptions {
   gap?: number;
   startAt?: number;
   // autoplay?: boolean;
-  breakpoints?: ZliderBreakpoints[];
+  breakpoints?: ZliderBreakpoints;
 }
 
 export interface ZliderProps {
