@@ -2,10 +2,7 @@
   <Zlider
     v-for="i in 2"
     :key="i"
-    :options="{
-      perView: 2,
-      gap: 64,
-    }"
+    v-bind="zProps"
   >
     i
     {{ i }}
@@ -26,7 +23,21 @@
 </template>
 
 <script setup lang="ts">
-//
+import { ref } from "vue";
+
+const zProps = ref({
+  mounted: true,
+  perView: 2,
+  gap: 64,
+  startAt: 2,
+  banas: 123,
+  breakpoints: {
+    992: {
+      perView: 4,
+      gap: 24,
+    },
+  },
+});
 </script>
 
 <style>

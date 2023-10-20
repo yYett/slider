@@ -4,7 +4,13 @@
     :id="state.instance"
     ref="zliderRef"
     class="the-slider"
-    :style="[getCssVariables(), { '--active-slide': handleActiveSlide }]"
+    :style="[
+      {
+        '--active-slide': handleActiveSlide,
+        '--items-gap': `${get('gap')}px`,
+        '--per-view': get('perView'),
+      },
+    ]"
     @mousedown="toggleSlide($event, true)"
     @mousemove="handleSlide"
     @mouseup="toggleSlide($event, false)"
@@ -20,7 +26,7 @@ import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
 import { initZlider } from "../utils/core";
 
-const props = defineProps<ZliderProps>();
+const props = defineProps<Partial<ZliderProps>>();
 
 interface ZliderState {
   instance: string;
@@ -29,36 +35,17 @@ interface ZliderState {
   diff: number;
 }
 
-const inicialState: ZliderState = {
+const state = reactive<ZliderState>({
   instance: genUnique(),
   move: false,
   initPosition: 0,
   diff: 0,
-};
+});
 
-const state = reactive<ZliderState>({ ...inicialState });
-const zliderRef = ref<HTMLElement>();
-
-const {
-  set,
-  get,
-  canZlide,
-  setSlidesNr,
-  slideNext,
-  slidePrev,
-  getCssVariables,
-} = useZlider(initZlider(state.instance, props?.options));
-
-provide(
-  "zliderInstance",
-  readonly({
-    instance: state?.instance,
-    get,
-    setSlidesNr,
-    slideNext,
-    slidePrev,
-  })
+const { set, get, canZlide, setSlidesNr, slideNext, slidePrev } = useZlider(
+  initZlider(state.instance, props)
 );
+const zliderRef = ref<HTMLElement>();
 
 const handleActiveSlide = computed(() => {
   const prev = get("activeSlide")!;
@@ -88,4 +75,15 @@ const handleSlide = debounce((event: MouseEvent): void => {
   const currPosition = (event.clientX * 100) / width;
   state.diff = currPosition - state.initPosition;
 }, 5);
+
+provide(
+  "zliderInstance",
+  readonly({
+    instance: state?.instance,
+    get,
+    setSlidesNr,
+    slideNext,
+    slidePrev,
+  })
+);
 </script>

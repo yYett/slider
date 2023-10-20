@@ -1,6 +1,5 @@
 import { useState } from "#imports";
 import { ZliderUseState } from "../interface/zlider";
-import type { StyleValue } from "vue";
 
 const useZlider = (obj: ZliderUseState) => {
   const state = useState<ZliderUseState>(obj.instance, () => obj);
@@ -23,7 +22,7 @@ const useZlider = (obj: ZliderUseState) => {
   };
 
   const setSlidesNr = (value: number): void => {
-    value && set("slidesNr", value - state.value.options.perView!);
+    value && set("slidesNr", value - state.value.perView!);
   };
 
   const slideNext = (): void => {
@@ -39,14 +38,6 @@ const useZlider = (obj: ZliderUseState) => {
     state.value.activeSlide = slide;
   };
 
-  const getCssVariables = (): StyleValue => {
-    const options = state.value.options;
-    return {
-      "--items-gap": `${options.gap}px`,
-      "--per-view": options.perView,
-    };
-  };
-
   return {
     state,
     set,
@@ -56,7 +47,6 @@ const useZlider = (obj: ZliderUseState) => {
     slideNext,
     slidePrev,
     slideTo,
-    getCssVariables,
   };
 };
 

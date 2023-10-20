@@ -1,3 +1,6 @@
+/**
+ * COMMONS
+ */
 export interface ZliderBreakpoints {
   [key: number]: {
     perView?: number;
@@ -5,33 +8,16 @@ export interface ZliderBreakpoints {
   };
 }
 
-export interface ZliderOptions {
-  perView?: number;
-  gap?: number;
-  startAt?: number;
-  // autoplay?: boolean;
-  breakpoints?: ZliderBreakpoints;
-}
+/**
+ * PROPS
+ */
 
 export interface ZliderProps {
-  init?: boolean;
-  options?: ZliderOptions;
-}
-
-export interface ZliderUseState {
-  instance: string;
-  init: boolean;
-  activeSlide: number;
-  slidesNr: number;
-  options: ZliderOptions;
-}
-
-export interface ZliderInjection {
-  instance: string;
-  get<T extends keyof ZliderUseState>(prop: T): ZliderUseState[T] | null;
-  setSlidesNr(value: number): void;
-  slideNext(): void;
-  slidePrev(): void;
+  mounted: boolean;
+  perView: number;
+  gap: number;
+  startAt: number;
+  breakpoints?: ZliderBreakpoints;
 }
 
 export interface ZliderItems {
@@ -40,4 +26,27 @@ export interface ZliderItems {
 
 export interface ZliderPagination {
   type?: "progress" | "scrollbar";
+}
+
+/**
+ * STATE
+ */
+
+export interface ZliderUseState {
+  instance: string;
+  mounted: boolean;
+  activeSlide: number;
+  slidesNr: number;
+  perView: number;
+  gap: number;
+  hasBreakpoints: boolean;
+  params: Partial<ZliderProps>;
+}
+
+export interface ZliderInjection {
+  instance: string;
+  get<T extends keyof ZliderUseState>(prop: T): ZliderUseState[T] | null;
+  setSlidesNr(value: number): void;
+  slideNext(): void;
+  slidePrev(): void;
 }
