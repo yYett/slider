@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { inject } from "vue";
 import { ZliderInjection } from "../interface/zlider";
-// const props = defineProps<TheSlider>();
+// const props = defineProps<unknown>();
 
 const { slideNext, slidePrev } = inject<ZliderInjection>("zliderInstance")!;
 

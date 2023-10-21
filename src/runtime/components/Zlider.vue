@@ -8,7 +8,7 @@
       {
         '--active-slide': handleActiveSlide,
         '--items-gap': `${get('gap')}px`,
-        '--per-view': get('perView'),
+        '--per-view': get('perView')?.toString(),
       },
     ]"
     @mousedown="toggleSlide($event, true)"
@@ -21,10 +21,11 @@
 </template>
 <script setup lang="ts">
 import type { ZliderProps } from "../interface/zlider";
-import { computed, reactive, ref, provide, readonly } from "vue";
+import { computed, reactive, ref, provide, readonly, onBeforeMount } from "vue";
 import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
 import { initZlider } from "../utils/core";
+import { useHead } from "#app";
 
 const props = defineProps<Partial<ZliderProps>>();
 
@@ -42,10 +43,10 @@ const state = reactive<ZliderState>({
   diff: 0,
 });
 
+const zliderRef = ref<HTMLElement>();
 const { set, get, canZlide, setSlidesNr, slideNext, slidePrev } = useZlider(
   initZlider(state.instance, props)
 );
-const zliderRef = ref<HTMLElement>();
 
 const handleActiveSlide = computed(() => {
   const prev = get("activeSlide")!;
@@ -86,4 +87,23 @@ provide(
     slidePrev,
   })
 );
+
+const st = `
+#${state.instance}{
+  color: red;
+
+  @media (min-width: 700px){
+    color: blue;
+  }
+}
+
+`;
+
+onBeforeMount(() => {
+  console.log(window);
+});
+
+useHead({
+  style: [st],
+});
 </script>
