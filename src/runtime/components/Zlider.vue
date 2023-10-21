@@ -21,10 +21,10 @@
 </template>
 <script setup lang="ts">
 import type { ZliderProps } from "../interface/zlider";
-import { computed, reactive, ref, provide, readonly, onBeforeMount } from "vue";
+import { computed, reactive, ref, provide, readonly } from "vue";
 import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
-import { initZlider } from "../utils/core";
+import { initZlider, genBreakpointsStyle } from "../utils/core";
 import { useHead } from "#app";
 
 const props = defineProps<Partial<ZliderProps>>();
@@ -88,22 +88,11 @@ provide(
   })
 );
 
-const st = `
-#${state.instance}{
-  color: red;
-
-  @media (min-width: 700px){
-    color: blue;
-  }
-}
-
-`;
-
-onBeforeMount(() => {
-  console.log(window);
-});
-
 useHead({
-  style: [st],
+  style: [
+    {
+      innerHTML: genBreakpointsStyle(state.instance, props.breakpoints),
+    },
+  ],
 });
 </script>
