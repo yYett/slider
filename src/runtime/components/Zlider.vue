@@ -17,15 +17,17 @@
     @mouseleave="toggleSlide($event, false)"
   >
     <slot />
+    <!-- <pre>{{ x }}</pre> -->
   </div>
 </template>
 <script setup lang="ts">
 import type { ZliderProps } from "../interface/zlider";
-import { computed, reactive, ref, provide, readonly } from "vue";
+import { computed, reactive, ref, provide, readonly, watch } from "vue";
 import useZlider from "../composables/useZlider";
 import { debounce, genUnique } from "../utils/commons";
-import { initZlider, genBreakpointsStyle } from "../utils/core";
-import { useHead } from "#app";
+import { initZlider } from "../utils/core";
+import { onMounted } from "vue";
+import { test } from "process";
 
 const props = defineProps<Partial<ZliderProps>>();
 
@@ -41,6 +43,20 @@ const state = reactive<ZliderState>({
   move: false,
   initPosition: 0,
   diff: 0,
+});
+
+const test = useZlider(initZlider("1234", props));
+console.log("A", test.state.value);
+
+const test2 = useZlider("1234");
+console.log("B", test2.state.value);
+
+onMounted(() => {
+  setTimeout(() => {
+    const test4 = useZlider(state.instance);
+    test4.set("activeSlide", 3);
+    console.log("B", test4.state.value);
+  }, 3000);
 });
 
 const zliderRef = ref<HTMLElement>();
@@ -88,11 +104,8 @@ provide(
   })
 );
 
-useHead({
-  style: [
-    {
-      innerHTML: genBreakpointsStyle(state.instance, props.breakpoints),
-    },
-  ],
-});
+// const x = computed(() => {
+//   if (!window) return false;
+//   return window.matchMedia("(min-width: 800px)").matches;
+// });
 </script>

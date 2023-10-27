@@ -1,8 +1,12 @@
 import { useState } from "#imports";
 import { ZliderUseState } from "../interface/zlider";
 
-const useZlider = (obj: ZliderUseState) => {
-  const state = useState<ZliderUseState>(obj.instance, () => obj);
+const useZlider = (data: ZliderUseState | string) => {
+  const instance = typeof data == "string" ? data : data?.instance;
+  const state = useState<ZliderUseState>(
+    instance,
+    () => data as ZliderUseState
+  );
 
   const set = <T extends keyof ZliderUseState>(
     prop: T,
