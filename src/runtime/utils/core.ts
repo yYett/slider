@@ -4,8 +4,6 @@ export const initZlider = (
   instance: string,
   payload: Partial<TheZliderProps>
 ): ZliderUseState => {
-  console.log("props", payload);
-
   const obj = {
     instance: instance,
     mounted: payload.mounted!,

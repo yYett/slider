@@ -1,6 +1,6 @@
 .the-zlider-pagination {
-  --bullet-width: calc(100% / (var(--pagination-bullets) + 1));
-  --color-bg: gray;
+  --tzp-bullet-width: calc(100% / (var(--pagination-bullets) + 1));
+  --tzp-color-bg: #000;
 
   grid-row: var(--pagination-row, 3);
   grid-column: var(--pagination-column, 1 / span 3);
@@ -11,17 +11,17 @@
   width: var(--pagination-width);
 
   &-progress {
-    background-color: var(--color-bg);
+    background-color: var(--tzp-color-bg);
     height: inherit;
-    width: calc(var(--bullet-width) * (var(--active-slide) + 1));
+    width: calc(var(--tzp-bullet-width) * (var(--active-slide) + 1));
     transition: all 0.4s ease;
   }
 
   &-scrollbar {
-    background-color: var(--color-bg);
+    background-color: var(--tzp-color-bg);
     height: inherit;
-    width: var(--bullet-width);
-    margin-left: calc(var(--bullet-width) * var(--active-slide));
+    width: var(--tzp-bullet-width);
+    margin-left: calc(var(--tzp-bullet-width) * var(--active-slide));
     transition: all 0.4s ease;
   }
 }

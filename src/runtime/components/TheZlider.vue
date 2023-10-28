@@ -7,6 +7,7 @@
       '--active-slide': handleActiveSlide,
       '--items-gap': `${zlider.get('gap')}px`,
       '--per-view': zlider.get('perView')?.toString(),
+      '--pagination-bullets': zlider.get('slidesNr') || 0,
     }"
     @mousedown="toggleSlide($event, true)"
     @mousemove="handleSlide"
