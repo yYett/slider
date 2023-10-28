@@ -3,7 +3,7 @@
  */
 export interface ZliderBreakpoints {
   [key: number]: {
-    perView?: number;
+    perView: number;
     gap?: number;
   };
 }
@@ -12,7 +12,7 @@ export interface ZliderBreakpoints {
  * PROPS
  */
 
-export interface ZliderProps {
+export interface TheZliderProps {
   mounted: boolean;
   perView: number;
   gap: number;
@@ -20,12 +20,12 @@ export interface ZliderProps {
   breakpoints?: ZliderBreakpoints;
 }
 
-export interface ZliderItems {
+export interface TheZliderItems {
   items: any[];
 }
 
 export interface ZliderPagination {
-  type?: "progress" | "scrollbar";
+  type: "scrollbar" | "progress";
 }
 
 /**
@@ -40,13 +40,5 @@ export interface ZliderUseState {
   perView: number;
   gap: number;
   hasBreakpoints: boolean;
-  params: Partial<ZliderProps>;
-}
-
-export interface ZliderInjection {
-  instance: string;
-  get<T extends keyof ZliderUseState>(prop: T): ZliderUseState[T] | null;
-  setSlidesNr(value: number): void;
-  slideNext(): void;
-  slidePrev(): void;
+  params: Partial<TheZliderProps>;
 }

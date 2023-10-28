@@ -1,21 +1,19 @@
-import {
-  ZliderBreakpoints,
-  ZliderProps,
-  ZliderUseState,
-} from "../interface/zlider";
+import { TheZliderProps, ZliderUseState } from "../interface/TheZlider";
 
 export const initZlider = (
   instance: string,
-  payload: Partial<ZliderProps>
+  payload: Partial<TheZliderProps>
 ): ZliderUseState => {
+  console.log("props", payload);
+
   const obj = {
     instance: instance,
-    mounted: payload?.mounted || true,
-    activeSlide: payload?.startAt || 0,
+    mounted: payload.mounted!,
+    activeSlide: payload.startAt!,
     slidesNr: 0,
-    perView: payload?.perView || 1,
+    perView: payload?.perView!,
     gap: payload?.gap || 32,
-    hasBreakpoints: payload.breakpoints
+    hasBreakpoints: payload?.breakpoints
       ? Object.keys(payload.breakpoints)?.length != 0
       : false,
     params: payload,

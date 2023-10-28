@@ -1,8 +1,7 @@
 import { useState } from "#imports";
-import { ZliderUseState } from "../interface/zlider";
+import { ZliderUseState } from "../interface/TheZlider";
 
-const useZlider = (data: ZliderUseState | string) => {
-  const instance = typeof data == "string" ? data : data?.instance;
+export const useTheZlider = (instance: string, data?: ZliderUseState) => {
   const state = useState<ZliderUseState>(
     instance,
     () => data as ZliderUseState
@@ -15,18 +14,17 @@ const useZlider = (data: ZliderUseState | string) => {
     if (prop) state.value[prop] = value;
   };
 
-  const get = <T extends keyof ZliderUseState>(
-    prop: T
-  ): ZliderUseState[T] | null => {
-    return prop ? state.value[prop] : null;
+  const get = <T extends keyof ZliderUseState>(prop: T): ZliderUseState[T] => {
+    return state.value?.[prop];
   };
 
   const canZlide = (value: number): boolean => {
     return value >= 0 && value <= state.value.slidesNr!;
   };
 
-  const setSlidesNr = (value: number): void => {
-    value && set("slidesNr", value - state.value.perView!);
+  const slideTo = (slide: number): void => {
+    if (!canZlide(slide)) return;
+    state.value.activeSlide = slide;
   };
 
   const slideNext = (): void => {
@@ -37,9 +35,8 @@ const useZlider = (data: ZliderUseState | string) => {
     state.value.activeSlide > 0 && state.value.activeSlide--;
   };
 
-  const slideTo = (slide: number): void => {
-    if (!canZlide(slide)) return;
-    state.value.activeSlide = slide;
+  const setSlidesNr = (value: number): void => {
+    value && set("slidesNr", value - state.value.perView!);
   };
 
   return {
@@ -47,11 +44,9 @@ const useZlider = (data: ZliderUseState | string) => {
     set,
     get,
     canZlide,
-    setSlidesNr,
     slideNext,
     slidePrev,
     slideTo,
+    setSlidesNr,
   };
 };
-
-export default useZlider;

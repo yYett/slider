@@ -1,11 +1,7 @@
 export default defineNuxtConfig({
   modules: ["../src/module"],
   runtimeConfig: {
-    public: {
-      theSlider: {
-        slidePerView: 1,
-      },
-    },
+    public: {},
   },
   devtools: {
     enabled: true,
