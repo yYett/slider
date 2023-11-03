@@ -15,16 +15,15 @@
     @mouseleave="toggleSlide($event, false)"
   >
     <slot />
-    <pre>{{ props }}</pre>
+    <pre>{{ zliderRef?.offsetWidth }} width</pre>
   </div>
 </template>
 <script setup lang="ts">
-import { useState, useHead, clearNuxtState } from "#imports";
-import { ref, computed, provide, onBeforeUnmount } from "vue";
+import { useState, clearNuxtState } from "#imports";
+import { ref, computed, provide, onBeforeUnmount, onBeforeMount } from "vue";
 import { useTheZlider } from "../composables/useTheZlider";
 import { debounce, genUnique } from "../utils/commons";
 import { initZlider } from "../utils/core";
-import { genStylesheet } from "../utils/breakpoints";
 import type { TheZliderProps } from "../interface/TheZlider";
 
 const props = withDefaults(defineProps<Partial<TheZliderProps>>(), {
@@ -46,6 +45,13 @@ const zlider = useTheZlider(instance.value, initZlider(instance.value, props));
 zliderLst.value.push(instance.value);
 
 provide("instance", instance.value);
+
+onBeforeMount(async () => {
+  if (zlider.get("hasBreakpoints"))
+    window.onresize = async () => {
+      zlider.handleBreakpoint(window.innerWidth);
+    };
+});
 
 const handleActiveSlide = computed(() => {
   const prev = zlider.get("activeSlide")!;
@@ -90,14 +96,5 @@ onBeforeUnmount(() => {
   // maybe: pass id as prop and keep it for future use
   // or maybe two slides with one intance an both change at same time
   // just thinking next uses
-});
-
-useHead({
-  style: [
-    {
-      innerHTML: computed(() => genStylesheet(zliderLst.value)),
-      id: "the-zlider-media-query",
-    },
-  ],
 });
 </script>

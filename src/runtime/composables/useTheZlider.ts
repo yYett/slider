@@ -39,6 +39,19 @@ export const useTheZlider = (instance: string, data?: ZliderUseState) => {
     value && set("slidesNr", value - state.value.perView!);
   };
 
+  const handleBreakpoint = (width: number): void => {
+    const { hasBreakpoints, params } = state.value;
+    if (!hasBreakpoints) return;
+
+    const matched = Object.entries(params.breakpoints!).find(
+      ([breakpoint]) => width > parseInt(breakpoint)
+    );
+    const { perView, gap } = matched ? matched[1] : params;
+
+    perView && set("perView", perView);
+    gap && set("gap", gap);
+  };
+
   return {
     state,
     set,
@@ -48,5 +61,6 @@ export const useTheZlider = (instance: string, data?: ZliderUseState) => {
     slidePrev,
     slideTo,
     setSlidesNr,
+    handleBreakpoint,
   };
 };
