@@ -1,23 +1,7 @@
 <template>
   <TheZlider v-for="(j, i) in c" v-bind="zliderProps" :key="i">
-    <TheZliderItems :items="[1, 2, 3, 5, 6, 7]">
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, eum et!
-        Sed cumque eos veritatis molestias dolore assumenda officia praesentium
-        maxime atque, asperiores deserunt perspiciatis illum neque
-        exercitationem pariatur explicabo doloribus ducimus impedit recusandae
-        delectus debitis reprehenderit aut commodi in. Totam expedita magnam
-        sapiente officia optio nostrum nesciunt repudiandae. Perferendis illo
-        debitis minima? Eius eum et consectetur. Perferendis ea dolor in ipsam
-        voluptate rem corrupti! Reiciendis omnis maiores dolores placeat,
-        necessitatibus ipsa natus eum blanditiis suscipit quam nobis,
-        praesentium mollitia explicabo repudiandae aspernatur minima eligendi
-        magnam autem nihil laudantium repellendus. Delectus pariatur aperiam
-        dolores, voluptatum dignissimos vero ducimus ullam esse obcaecati dolore
-        eveniet tenetur distinctio adipisci repellat, dolor mollitia quia
-        praesentium tempora cumque laborum vitae iusto aspernatur beatae?
-        Voluptates, deserunt.
-      </p>
+    <TheZliderItems v-slot="slideData" :items="[1, 2, 3, 5, 6, 7]">
+      {{ slideData }}
     </TheZliderItems>
     <TheZliderArrows />
     <TheZliderPagination />

@@ -14,13 +14,13 @@ const props = defineProps<TheZliderItems>();
 const intance = inject<string>("instance");
 const { get, setSlidesNr, handleBreakpoint } = useTheZlider(intance!);
 
-setSlidesNr(props.items.length);
+const update = (): void => {
+  handleBreakpoint(window.innerWidth);
+  setSlidesNr(props.items.length);
+};
 
 onBeforeMount(async () => {
-  if (get("hasBreakpoints"))
-    window.onresize = async () => {
-      handleBreakpoint(window.innerWidth);
-      setSlidesNr(props.items.length);
-    };
+  update();
+  if (get("hasBreakpoints")) window.onresize = async () => update;
 });
 </script>

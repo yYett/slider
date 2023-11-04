@@ -1,10 +1,13 @@
 {
-  "name": "zlider",
-  "version": "0.2.0",
+  "name": "the-zlider",
+  "version": "0.2.1",
   "description": "Nuxt 3 - slider module",
   "license": "MIT",
   "type": "module",
   "keywords": ["nuxt3", "slider"],
+  "repository": {
+    "url": "https://github.com/yYett/slider"
+  },
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
@@ -22,7 +25,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "npm run lint &&  npm run prepack && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"

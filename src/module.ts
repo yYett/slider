@@ -11,7 +11,7 @@ export interface ModuleOptions {}
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     // Usually the npm package name of your module
-    name: "zlider",
+    name: "the-zlider",
     // The key in `nuxt.config` that holds your module options
     configKey: "zlider",
     compatibility: {
