@@ -1,9 +1,10 @@
 {
-  "name": "yyett-zlider",
+  "name": "zlider",
   "version": "0.2.0",
   "description": "Nuxt 3 - slider module",
   "license": "MIT",
   "type": "module",
+  "keywords": ["nuxt3", "slider"],
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
