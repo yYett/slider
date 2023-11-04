@@ -1,4 +1,12 @@
-# Use:
+## Install
+> npm i the-zlider
+
+Inside nuxt.config.ts add
+```
+  modules: ["the-zlider"]
+```
+
+## Use:
 TheZliderItems makes use of [scoped slots](https://vuejs.org/guide/components/slots.html#scoped-slots)
 ```
   const zliderProps = {
