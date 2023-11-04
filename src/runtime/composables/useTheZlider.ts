@@ -36,7 +36,11 @@ export const useTheZlider = (instance: string, data?: ZliderUseState) => {
   };
 
   const setSlidesNr = (value: number): void => {
-    value && set("slidesNr", value - state.value.perView!);
+    const { activeSlide } = state.value;
+    const slidesNr = value - state.value.perView;
+
+    value && set("slidesNr", slidesNr);
+    activeSlide > slidesNr && set("activeSlide", slidesNr);
   };
 
   const handleBreakpoint = (width: number): void => {
