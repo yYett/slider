@@ -1,19 +1,21 @@
-import { inicialState } from "../config/inicial-state";
-import { ZliderOptions, ZliderUseState } from "../interface/zlider";
+import { TheZliderProps, ZliderUseState } from "../interface/TheZlider";
 
 export const initZlider = (
   instance: string,
-  options?: ZliderOptions
+  payload: Partial<TheZliderProps>
 ): ZliderUseState => {
-  options = Object.assign({ ...inicialState.options }, options);
-  const obj = Object.assign(
-    { ...inicialState },
-    {
-      instance: instance,
-      activeSlide: options?.startAt ?? 0,
-      options: options,
-    }
-  );
+  const obj = {
+    instance: instance,
+    mounted: payload.mounted!,
+    activeSlide: payload.startAt!,
+    slidesNr: 0,
+    perView: payload?.perView!,
+    gap: payload?.gap || 32,
+    hasBreakpoints: payload?.breakpoints
+      ? Object.keys(payload.breakpoints)?.length != 0
+      : false,
+    params: payload,
+  };
 
   return obj;
 };

@@ -7,7 +7,7 @@ $navigation-map: (
   ),
 );
 
-.the-slider .the-navigation {
+.the-zlider-nav {
   // no code
 
   &-prev,
@@ -18,8 +18,9 @@ $navigation-map: (
 
     cursor: pointer;
     aspect-ratio: 1 / 1;
+    width: var(--navigation-width, 1rem);
 
-    background-color: crimson;
+    background-color: var(--navigation-clr-bg);
 
     &-top {
       --navigation-row: 1;

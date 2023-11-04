@@ -14,6 +14,9 @@ export default defineNuxtModule<ModuleOptions>({
     name: "yyett-zlider",
     // The key in `nuxt.config` that holds your module options
     configKey: "zlider",
+    compatibility: {
+      nuxt: "^3.0.0",
+    },
   },
   defaults: {},
   setup(options, nuxt) {

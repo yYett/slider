@@ -1,32 +1,52 @@
 <template>
-  <Zlider
-    v-for="i in 2"
-    :key="i"
-    :options="{
-      perView: 2,
-      gap: 64,
-    }"
-  >
-    i
-    {{ i }}
-    <ZliderItems
-      v-slot="slotProps"
-      :items="[1, 2, 3, 4, 5, 6]"
-    >
-      <h3>Slide - {{ slotProps.item }}</h3>
+  <TheZlider v-for="(j, i) in c" v-bind="zliderProps" :key="i">
+    <TheZliderItems :items="[1, 2, 3, 5, 6, 7]">
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eum
-        tempora laudantium aspernatur porro a deleniti totam, reiciendis,
-        officiis esse corrupti. Velit aliquam tempore nihil.
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, eum et!
+        Sed cumque eos veritatis molestias dolore assumenda officia praesentium
+        maxime atque, asperiores deserunt perspiciatis illum neque
+        exercitationem pariatur explicabo doloribus ducimus impedit recusandae
+        delectus debitis reprehenderit aut commodi in. Totam expedita magnam
+        sapiente officia optio nostrum nesciunt repudiandae. Perferendis illo
+        debitis minima? Eius eum et consectetur. Perferendis ea dolor in ipsam
+        voluptate rem corrupti! Reiciendis omnis maiores dolores placeat,
+        necessitatibus ipsa natus eum blanditiis suscipit quam nobis,
+        praesentium mollitia explicabo repudiandae aspernatur minima eligendi
+        magnam autem nihil laudantium repellendus. Delectus pariatur aperiam
+        dolores, voluptatum dignissimos vero ducimus ullam esse obcaecati dolore
+        eveniet tenetur distinctio adipisci repellat, dolor mollitia quia
+        praesentium tempora cumque laborum vitae iusto aspernatur beatae?
+        Voluptates, deserunt.
       </p>
-    </ZliderItems>
-    <ZliderArrows />
-    <ZliderPagination />
-  </Zlider>
+    </TheZliderItems>
+    <TheZliderArrows />
+    <TheZliderPagination />
+  </TheZlider>
 </template>
 
 <script setup lang="ts">
-//
+import { ref } from "vue";
+
+const zliderProps = ref({
+  mounted: true,
+  perView: 2,
+  gap: 64,
+  startAt: 2,
+  breakpoints: {
+    456: {
+      perView: 4,
+      gap: 24,
+    },
+    950: {
+      perView: 4,
+      gap: 24,
+    },
+  },
+});
+
+const c = ref(1);
+
+// setInterval(() => c.value++, 5000);
 </script>
 
 <style>
