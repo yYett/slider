@@ -24,12 +24,5 @@ export default defineNuxtModule<ModuleOptions>({
 
     addComponentsDir({ path: resolve("runtime/components") });
     addImportsDir(resolve("runtime/composables"));
-
-    nuxt.options.css.push(
-      ...[
-        resolve("runtime/style/main.scss"),
-        resolve("runtime/style/items.scss"),
-      ]
-    );
   },
 });

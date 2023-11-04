@@ -24,3 +24,6 @@ onBeforeMount(async () => {
   if (get("hasBreakpoints")) window.onresize = async () => update;
 });
 </script>
+<style scoped lang="scss">
+@import "../style/items.scss";
+</style>

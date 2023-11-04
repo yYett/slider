@@ -91,3 +91,6 @@ onBeforeUnmount(() => {
   // just thinking next uses
 });
 </script>
+<style scoped lang="scss">
+@import "../style/main.scss";
+</style>
